@@ -2,10 +2,7 @@ import subprocess
 import sys
 
 
-width = sys.argv[1]
-height = sys.argv[2]
-refresh = sys.argv[3]
-adapter = sys.argv[4]
+
 def change_resolution(width, height, refresh,adapter):
     terminal_cvt = subprocess.run(['cvt', width, height, refresh], capture_output=True, text=True).stdout
     modeline = terminal_cvt[terminal_cvt.find("Modeline") + 9:]
@@ -23,8 +20,13 @@ def change_resolution(width, height, refresh,adapter):
 
 #main
 if(len(sys.argv) == 5):
+    width = sys.argv[1]
+    height = sys.argv[2]
+    refresh = sys.argv[3]
+    adapter = sys.argv[4]
     change_resolution(width, height, refresh,adapter)
 else:
     print("Missing args")
     print("Usage:python3 xorg_resolution_changer.py WIDTH HEIGHT REFRESH ADAPTER")
     print("Example:" + "python3 xorg_resolution_changer.py 1280 1024 75 VGA-1")
+
